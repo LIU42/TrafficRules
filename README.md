@@ -21,10 +21,10 @@
 ## 效果展示
 
 ![](assets/example.jpg)
-性能评估
-----
 
-模型的输入尺寸固定为 640x480，在 此图像输入下，采用 PyTorch 平均推理一张图片的耗时约为 50ms，采用 ONNX Runtime 推理平均耗时约为 40ms（CPU：11th Intel Core i5-1155G7 2.50GHz，Model：YOLOv8n）。
+## 性能评估
+
+模型的输入尺寸固定为 640x480，在此图像输入下，采用 PyTorch 平均推理一张图片的耗时约为 50ms，采用 ONNX Runtime 推理平均耗时约为 40ms（CPU：11th Intel Core i5-1155G7 2.50GHz，Model：YOLO11n）。
 
 在当前数据集下信号灯目标检测准确性指标：
 
@@ -84,5 +84,3 @@ model-path: "inferences/models/detection-fp32.onnx"    # 模型加载路径
 ```bash
 pip install ultralytics
 ```
-
-

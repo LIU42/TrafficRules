@@ -1,0 +1,12 @@
+train: "../train/images"
+val: "../val/images"
+
+names: 
+  0: "F0"
+  1: "F1"
+  2: "L0"
+  3: "L1"
+  4: "S0"
+  5: "S1"
+  6: "R0"
+  7: "R1"

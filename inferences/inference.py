@@ -4,8 +4,10 @@ import yaml
 import numpy as np
 
 
-with open('configs/inference.yaml', 'r') as configs:
-    configs = yaml.load(configs, Loader=yaml.FullLoader)
+with open('inferences/configs/inference.yaml', 'r') as configs:
+    configs = yaml.load(configs, Loader=yaml.SafeLoader)
+
+session = ort.InferenceSession(configs['model-path'], providers=configs['session-providers'])
 
 classes_labels = [
     'F0', 'F1',
@@ -13,9 +15,6 @@ classes_labels = [
     'S0', 'S1',
     'R0', 'R1',
 ]
-
-session = ort.InferenceSession(configs['model-path'], providers=configs['session-providers'])
-
 
 def preprocess(image):
     inputs = cv2.cvtColor(image, cv2.COLOR_BGR2RGB).transpose((2, 0, 1))

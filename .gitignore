@@ -163,9 +163,8 @@ cython_debug/
 datasets/train/*
 datasets/val/*
 
-inferences/images/*
-inferences/models/*
-inferences/results/*
-
-runs/*
 checkpoints/*
+runs/*
+samples/*
+outputs/*
+inferences/models/*

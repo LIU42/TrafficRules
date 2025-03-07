@@ -57,7 +57,7 @@ pip install -r requirements.txt
 pip install onnxruntime-gpu
 ```
 
-待识别图像默认位于 inferences/images/ ，识别结果默认保存位于 inferences/results/，如果以上两个目录不存在请先创建。
+待识别图像默认位于 samples/ ，识别结果默认保存位于 outputs/，如果以上两个目录不存在请先创建。
 
 将所有待识别的图像放入待识别图像目录下，要求图像尺寸为 640x480，可以在本项目 Releases 中下载训练好的模型权重文件，解压到 inferences/models/ 下，运行 main.py 即可。
 
@@ -65,7 +65,7 @@ pip install onnxruntime-gpu
 python main.py
 ```
 
-本项目识别程序的默认配置文件为 configs/inference.yaml，其中各个属性对应的含义如下：
+本项目识别程序的默认配置文件为 inferences/configs/inference.yaml，其中各个属性对应的含义如下：
 
 ```yaml
 precision: "fp32"            # 推理运算精度，"fp32"（单精度）或 "fp16"（半精度）

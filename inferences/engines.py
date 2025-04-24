@@ -1,14 +1,10 @@
 import onnxruntime as ort
 import cv2
-import yaml
+import toml
 import numpy as np
 
 
-with open('inferences/configs/inference.yaml', 'r') as configs:
-    configs = yaml.load(configs, Loader=yaml.SafeLoader)
-
-
-session = ort.InferenceSession(configs['model-path'], providers=configs['session-providers'])
+configs = toml.load('inferences/configs/config.toml')
 
 classes_labels = [
     'F0', 'F1',
@@ -16,6 +12,8 @@ classes_labels = [
     'S0', 'S1',
     'R0', 'R1',
 ]
+
+session = ort.InferenceSession(configs['model-path'], providers=configs['providers'])
 
 
 def preprocess(image):
@@ -88,4 +86,4 @@ def inference(image):
         if label == 'R1':
             result2 = True
 
-    return detections, (result0, result1, result2)
+    return (result0, result1, result2), detections

@@ -1,0 +1,7 @@
+precision = "fp32"
+providers = ["OpenVINOExecutionProvider", "CPUExecutionProvider"]
+
+conf-threshold = 0.25
+iou-threshold = 0.45
+
+model-path = "inferences/models/detection-fp32.onnx"

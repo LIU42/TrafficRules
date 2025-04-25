@@ -42,38 +42,38 @@
 
 ## 使用说明
 
-首先需要安装环境依赖包，本项目目前采用 ONNX Runtime 部署模型推理，如果对 Execution Provider 有特殊需求，请参阅 [官方文档](https://onnxruntime.ai/docs/execution-providers/) 进行配置，同时按需更改识别程序的配置文件。
+首先需要安装环境依赖包，本项目目前采用 ONNX Runtime 部署模型推理，如果对 Execution Provider 有特殊需求，请参阅 [官方文档](https://onnxruntime.ai/docs/execution-providers/) 进行配置。
 
 ```shell-session
 pip install -r requirements.txt
 ```
 
-准备好待识别图像，识别程序接受的图像尺寸为 640x480，在本项目 Releases 中下载我训练好的模型权重文件，解压到 "inferences/models" 目录下，运行主程序 main.py 即可。
+准备好待识别图像，识别程序接受的图像尺寸为 640x480，在本项目 Releases 中下载训练好的模型权重文件，解压到 inferences/models 目录下，运行主程序 main.py 即可。
 
 ```shell-session
-python main.py --sources "1.jpg" "2.jpg" --outputs "1.jpg" "2.jpg"
+python main.py --sources "1.jpg" "2.jpg" --outputs "result_1.jpg" "result_2.jpg"
 ```
 
-其中命令行参数的含义如下，输入图像文件路径数量需要和输出图像文件路径数量保持一致：
+主程序 main.py 命令行参数的含义如下，其中输入图像文件路图像文件路径数量保持一致：
 
-| 参数名       | 简化参数名 | 参数描述                       | 参数值示例             |
-|:---------:|:-----:|:--------------------------:|:-----------------:|
-| --sources | -s    | 输入预测图像文件路径序列，不同的文件路径以空格分隔。 | 1.jpg 2.jpg 3.jpg |
-| --outputs | -o    | 输出结果图像文件路径序列，不同的文件路径以空格分隔。 | 1.jpg 2.jpg 3.jpg |
+| 参数名       | 简化参数名 | 参数描述                       |
+|:---------:|:-----:|:--------------------------:|
+| --sources | -s    | 输入预测图像文件路径序列，不同的文件路径以空格分隔。 |
+| --outputs | -o    | 输出结果图像文件路径序列，不同的文件路径以空格分隔。 |
 
-本项目的识别程序被设计为一个即插即用的 Python 模块。可以将 inferences 模块完整拷贝到项目根目录下，如果名称与项目中原有的内容冲突也可以更改模块名，同时配置好环境并安装好相关的依赖，参考 main.py 中的调用方式，即可为项目添加通行规则识别的功能。
+本项目的识别程序被设计为一个即插即用的 Python 模块，可以将 inferences 模块完整拷贝到其他项目根目录下，配置好环境并安装好相关的依赖，参考 main.py 中的调用方式。
 
-本项目的通行规则识别模块默认的配置文件为 "inferences/configs/config.toml"，其中各个属性描述如下：
+通行规则识别模块默认的配置文件为 inferences/configs/config.toml，其中各个属性描述如下：
 
-| 属性名            | 描述                                       |
+| 属性名            | 属性描述                                     |
 |:--------------:|:----------------------------------------:|
-| precision      | 推理运算精度，可取 "fp32"（单精度）或 "fp16"（半精度）       |
 | providers      | 模型推理 ONNX Runtime Execution Providers 列表 |
+| precision      | 推理运算精度，可取 "fp32"（单精度）或 "fp16"（半精度）       |
+| model-path     | 推理模型加载路径                                 |
 | conf-threshold | 目标检测置信度阈值                                |
 | iou-threshold  | 目标检测非极大值抑制 IoU 阈值                        |
-| model-path     | 推理模型加载路径                                 |
 
-此外，如果需要使用自己的数据集训练模型，则需要安装 ultralytics 框架，参照 [Ultralytics 官方文档](https://docs.ultralytics.com/) 进行模型的训练，最后将模型转换为 ONNX 格式进行部署即可。
+如果需要使用自己的数据集训练模型，则需要安装 ultralytics 框架，参照 [Ultralytics 官方文档](https://docs.ultralytics.com/) 进行模型的训练，最后将模型转换为 ONNX 格式进行部署即可。
 
 ```shell-session
 pip install ultralytics
